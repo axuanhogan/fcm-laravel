@@ -1,9 +1,6 @@
 /node_modules
-/storage
 /vendor
 /public/storage
-/storage
-/vendor
 .env
 .env.backup
 .phpunit.result.cache
