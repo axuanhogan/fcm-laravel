@@ -1,6 +1,6 @@
 ## Introduction
 
-    This is my FCM demo, set up the environment with docker-compose
+This is my FCM demo, set up the environment with docker-compose
 
 ## Installation
 
@@ -19,12 +19,12 @@
     ```
 
 - You can
-    - Watch container info
+    - See container info
         ```sh
         docker ps
         ```
-    - Watch DB info from phpmyadmin(localhost:8090)
-    - Watch Queue info from RabbitMQ(localhost:15673)
+    - See DB info from phpmyadmin `localhost:8090`
+    - See Queue info from RabbitMQ `localhost:15673`
 
 ## Documentation
  1. [FCM Authorize send requests](https://firebase.google.com/docs/cloud-messaging/server)
