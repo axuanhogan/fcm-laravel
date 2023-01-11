@@ -1,6 +1,8 @@
 ## Introduction
 
-This is my FCM demo, set up the environment with docker-compose
+This is my FCM demo with Laravel and RabbitMQ
+
+Set up the environment with docker-compose
 
 ## Installation
 
