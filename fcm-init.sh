@@ -1,4 +1,4 @@
-# install package
+# install php package
 rm -rf vendor/
 composer install --ignore-platform-reqs
 composer dumpautoload
@@ -9,6 +9,10 @@ php artisan key:generate
 php artisan config:clear
 php artisan cache:clear
 chmod -R 775 /var/www/html/storage
+
+# install node package
+npm install
+npm run dev
 
 # DB migrate
 php artisan migrate

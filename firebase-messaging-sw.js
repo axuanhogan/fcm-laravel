@@ -2,13 +2,13 @@ importScripts("https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"
 importScripts("https://www.gstatic.com/firebasejs/9.15.0/firebase-messaging-compat.js");
 
 firebase.initializeApp({
-    apiKey: "",
-    authDomain: "",
-    projectId: "",
-    storageBucket: "",
-    messagingSenderId: "",
-    appId: "",
-    measurementId: ""
+    apiKey: "{Your Firebase apiKey}",
+    authDomain: "{Your Firebase authDomain}",
+    projectId: "{Your Firebase projectId}",
+    storageBucket: "{Your Firebase storageBucket}",
+    messagingSenderId: "{your messagingSenderId}",
+    appId: "{Your Firebase appId}",
+    measurementId: "{Your Firebase measurementId}"
 });
 
 const messaging = firebase.messaging();

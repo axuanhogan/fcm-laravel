@@ -11,6 +11,7 @@ use Illuminate\Bus\Queueable;
 
 // Services
 use \App\Services\FCMJobService;
+use \App\Services\UserService;
 
 class FCMJob implements ShouldQueue
 {
@@ -23,6 +24,7 @@ class FCMJob implements ShouldQueue
 
     private $input;
     private $fcm_job_service;
+    private $user_service;
 
     /**
      * Create a new job instance.
@@ -30,10 +32,11 @@ class FCMJob implements ShouldQueue
      * @param array $input
      * @return void
      */
-    public function __construct(array $input, FCMJobService $fcm_job_service)
+    public function __construct(array $input, FCMJobService $fcm_job_service, UserService $user_service)
     {
         $this->input = $input;
         $this->fcm_job_service = $fcm_job_service;
+        $this->user_service = $user_service;
     }
 
     /**
@@ -43,6 +46,8 @@ class FCMJob implements ShouldQueue
      */
     public function handle(): void
     {
+        $notification_token = $this->user_service->getNotificationToken();
+
         // get access token
         $client = new \Google_Client();
         $client->setAuthConfig(base_path() . '/' . static::OAUTH_FILE);
@@ -53,7 +58,7 @@ class FCMJob implements ShouldQueue
         // set params & headers
         $params = json_encode([
             'message' => [
-                'topic' => 'general',
+                'token' => 'dZZBM9P0rgf7YOnZfoYUps:APA91bFFxzI0E_giKegn9clur3sP8byxC0EoUjZPZk32D2O6JxGwL_s01HH7ZqMhzkFRxWC-fKC-H_faWmX5lx2urtKTFt_THTIRiPzWs6QbRHuJ7s7GZ75iP7oYJ-F5vUmvwPu4QQTI',
                 'notification' => [
                     'title'	=> 'Incoming message',
                     'body' 	=> 'text'

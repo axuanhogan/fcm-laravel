@@ -11,6 +11,7 @@ use \App\Jobs\FCMJob;
 
 // Services
 use \App\Services\FCMJobService;
+use \App\Services\UserService;
 
 class PublishAMQP extends Command
 {
@@ -31,16 +32,18 @@ class PublishAMQP extends Command
     protected $description = 'publish message';
 
     private $fcm_job_service;
+    private $user_service;
 
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct(FCMJobService $fcm_job_service)
+    public function __construct(FCMJobService $fcm_job_service, UserService $user_service)
     {
         parent::__construct();
         $this->fcm_job_service = $fcm_job_service;
+        $this->user_service = $user_service;
     }
 
     /**
@@ -60,7 +63,7 @@ class PublishAMQP extends Command
 
         Amqp::consume('notification.fcm', function ($message, $resolver) {
             $payload = json_decode($message->getBody(), true);
-            dispatch(new FCMJob($payload, $this->fcm_job_service));
+            dispatch(new FCMJob($payload, $this->fcm_job_service, $this->user_service));
             $resolver->acknowledge($message);
             $resolver->stopWhenProcessed();
         });
