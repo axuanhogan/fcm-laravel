@@ -3,7 +3,6 @@ version: '3.3'
 services:
   phpapache:
     container_name: php7.2-apache
-    restart: always
     image: php:7.2-apache
     depends_on:
       - db
@@ -11,11 +10,20 @@ services:
       - "81:80"
     volumes:
       - .:/var/www/html
-    command: bash -c "while ! curl -s db:3306 > /dev/null; do echo waiting for db; sleep 7; done; sh -c phpapache-start.sh"
+    command:
+      - sh
+      - -c
+      - |
+        apt-get update
+        apt-get install -y curl zip unzip
+        docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable pdo_mysql
+        curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=2.3.10
+        chmod -R 775 ./fcm-init.sh
+        while ! curl -s db:3306 > /dev/null; do echo waiting for db; sleep 7; done; ./fcm-init.sh
   db:
     container_name: mysql-8.0.25
     restart: always
-    platform: linux/x86_64 # 解決 no matching manifest for linux/arm64/v8 in the manifest list entries
+    platform: linux/x86_64 # Fix no matching manifest for linux/arm64/v8 in the manifest list entries
     image: mysql:8.0.25
     ports:
       - "3308:3306"
@@ -26,7 +34,6 @@ services:
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci --default-authentication-plugin=mysql_native_password
   phpmyadmin:
     container_name: phpmyadmin-5.2.0
-    restart: always
     image: phpmyadmin:5.2.0
     depends_on:
       - db
@@ -38,7 +45,6 @@ services:
       PMA_PORT: 3306
   rabbitmq-management:
     container_name: rabbitmq-management
-    restart: always
     image: rabbitmq:management
     hostname: rabbitmq
     depends_on:
