@@ -11,7 +11,8 @@
 |
 */
 
-Route::group(['prefix' => 'fcm-job'], function () {
-    Route::get('push', 'FCMJobController@index');
-    Route::post('push', 'FCMJobController@push');
+Route::get('index', 'FCMJobController@index');
+
+Route::group(['prefix' => 'user'], function () {
+    Route::post('save-notification-token', 'UserController@saveNotificationToken');
 });

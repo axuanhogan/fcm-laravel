@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 // Models
-use \App\Models\FCMJob as ModelFCMJob;
+use \App\Models\FCMJobModel;
 
 class FCMJobRepository
 {
@@ -12,7 +12,7 @@ class FCMJobRepository
     /**
      * Constructor
      */
-    public function __construct(ModelFCMJob $fcm_job_model)
+    public function __construct(FCMJobModel $fcm_job_model)
     {
         $this->fcm_job_model = $fcm_job_model;
     }
@@ -20,9 +20,9 @@ class FCMJobRepository
     /**
      * Create single data
      *
-     * @return ModelFCMJob
+     * @return FCMJobModel
      */
-    public function createSingle(array $data): ModelFCMJob
+    public function createSingle(array $data): FCMJobModel
     {
         return $this->fcm_job_model->create($data);
     }
