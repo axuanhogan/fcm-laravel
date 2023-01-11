@@ -27,6 +27,10 @@ Set up the environment with docker-compose
         ```
     - See DB info from phpmyadmin `localhost:8090`
     - See Queue info from RabbitMQ `localhost:15673`
+    - Shutdown and remove container
+        ```sh
+        docker-compose down
+        ```
 
 ## Documentation
  1. [FCM Authorize send requests](https://firebase.google.com/docs/cloud-messaging/server)
