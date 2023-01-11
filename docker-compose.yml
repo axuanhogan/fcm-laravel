@@ -1,0 +1,51 @@
+version: '3.3'
+
+services:
+  phpapache:
+    container_name: php7.2-apache
+    restart: always
+    image: php:7.2-apache
+    depends_on:
+      - db
+    ports:
+      - "81:80"
+    volumes:
+      - .:/var/www/html
+    command: bash -c "while ! curl -s db:3306 > /dev/null; do echo waiting for db; sleep 7; done; sh -c phpapache-start.sh"
+  db:
+    container_name: mysql-8.0.25
+    restart: always
+    platform: linux/x86_64 # 解決 no matching manifest for linux/arm64/v8 in the manifest list entries
+    image: mysql:8.0.25
+    ports:
+      - "3308:3306"
+    environment:
+      TZ: Asia/Taipei
+      MYSQL_DATABASE: firebase_demo
+      MYSQL_ROOT_PASSWORD: root
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci --default-authentication-plugin=mysql_native_password
+  phpmyadmin:
+    container_name: phpmyadmin-5.2.0
+    restart: always
+    image: phpmyadmin:5.2.0
+    depends_on:
+      - db
+      - phpapache
+    ports:
+      - "8090:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+  rabbitmq-management:
+    container_name: rabbitmq-management
+    restart: always
+    image: rabbitmq:management
+    hostname: rabbitmq
+    depends_on:
+      - phpapache
+    ports:
+      - "5673:5672"
+      - "15673:15672"
+    volumes:
+      - ./rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json
