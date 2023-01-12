@@ -34,6 +34,8 @@ class UserRepository
      */
     public function getNotificationToken(): UserModel
     {
-        return $this->user_model->first();
+        return $this->user_model
+            ->orderBy('created_at', 'desc')
+            ->first();
     }
 }

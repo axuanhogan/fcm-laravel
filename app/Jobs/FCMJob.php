@@ -58,7 +58,7 @@ class FCMJob implements ShouldQueue
         // set params & headers
         $params = json_encode([
             'message' => [
-                'token' => 'dZZBM9P0rgf7YOnZfoYUps:APA91bFFxzI0E_giKegn9clur3sP8byxC0EoUjZPZk32D2O6JxGwL_s01HH7ZqMhzkFRxWC-fKC-H_faWmX5lx2urtKTFt_THTIRiPzWs6QbRHuJ7s7GZ75iP7oYJ-F5vUmvwPu4QQTI',
+                'token' => $notification_token,
                 'notification' => [
                     'title'	=> 'Incoming message',
                     'body' 	=> 'text'
