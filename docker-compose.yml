@@ -14,12 +14,12 @@ services:
       - sh
       - -c
       - |
+        docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable pdo_mysql
         echo "ServerName localhost" >> /etc/apache2/apache2.conf
         a2enmod rewrite
         service apache2 restart
         apt-get update
         apt-get install -y curl zip unzip npm
-        docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable pdo_mysql
         curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=2.3.10
         chmod -R 775 ./fcm-init.sh
         while ! curl -s db:3306 > /dev/null; do echo waiting for db; sleep 7; done; ./fcm-init.sh
