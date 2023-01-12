@@ -6,7 +6,7 @@ composer dumpautoload
 # set env
 cp ./.env.example ./.env
 php artisan key:generate
-php artisan config:clear
+php artisan config:cache
 php artisan cache:clear
 chmod -R 775 /var/www/html/storage
 
