@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getMessaging, getToken } from "firebase/messaging";
+import { getMessaging, getToken, deleteToken } from "firebase/messaging";
 
 const firebaseConfig = {
     apiKey: "{Your Firebase apiKey}",
@@ -27,7 +27,6 @@ Notification.requestPermission()
     }
 })
 .then((notificationToken) => {
-    console.log(notificationToken);
     if (notificationToken) {
         let csrfToken = document.querySelector('meta[name="csrf-token"]').content;
         fetch('user/save-notification-token', {

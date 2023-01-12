@@ -47,7 +47,7 @@ Set up the environment with docker-compose.
 
 ## Basic Usage
 
-- Open `localhost:81` & Publish default message to queue.
+- Open `localhost:81/public/index` & Publish default message to queue.
     ```sh
     php artisan publish
     ```
