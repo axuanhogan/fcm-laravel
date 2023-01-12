@@ -47,10 +47,14 @@ Set up the environment with docker-compose.
 
 ## Basic Usage
 
-- Open `localhost:81/public/index` & Publish default message to queue.
+1. Open `localhost:81/public/index` and wait for `Save token done.` display in page.
+
+2. Publish default message to queue.
     ```sh
     php artisan publish
     ```
+
+## Remark
 
 - You can：
     - See container info.
