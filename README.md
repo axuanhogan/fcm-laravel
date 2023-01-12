@@ -40,7 +40,7 @@ Set up the environment with docker-compose.
 
 4. Add your Firebase Admin SDK file `credentials.json` to root dir.
 
-5. Run install.sh (about 5 ~ 8 mins), and then you will enter docker container.
+5. Run install.sh, and then you will enter docker container. (install time is about 5 ~ 8 mins)
     ```sh
     sh install.sh
     ```
