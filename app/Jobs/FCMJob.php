@@ -72,7 +72,7 @@ class FCMJob implements ShouldQueue
 
         // curl fcm message send
         $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, 'https://fcm.googleapis.com/v1/projects/' . env('FIREBASE_PROJECT_ID') . '/messages:send');
+        curl_setopt($curl, CURLOPT_URL, 'https://fcm.googleapis.com/v1/projects/' . config('app.firebase_project_id') . '/messages:send');
         curl_setopt($curl, CURLOPT_POST, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);

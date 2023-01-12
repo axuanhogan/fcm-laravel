@@ -123,6 +123,8 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    'firebase_project_id' => env('FIREBASE_PROJECT_ID'), // Firebase Project ID
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -174,7 +176,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        
+
         Bschmitt\Amqp\AmqpServiceProvider::class,
     ],
 
