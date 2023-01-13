@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getMessaging, getToken, deleteToken } from "firebase/messaging";
+import { getMessaging, getToken } from "firebase/messaging";
 
 const firebaseConfig = {
     apiKey: "{Your Firebase apiKey}",
@@ -40,7 +40,11 @@ Notification.requestPermission()
             })
         })
         .then(response => {
-            return response.json();
+            if (500 == response.status) {
+                return 'Environment building, please wait...';
+            } else {
+                return response.json();
+            }
         })
         .then(result => {
             console.log(result);
